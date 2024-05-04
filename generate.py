@@ -63,6 +63,7 @@ def create_query(location, postal_code = False):
         way["highway"="tertiary"](area.searchArea);
         way["highway"="pedestrian"](area.searchArea);
         way["highway"="path"](area.searchArea);
+        way["highway"="living_street"](area.searchArea);
         );
         out geom;"""
         
@@ -123,8 +124,6 @@ def generate_figure(positions, edges):
     
     layout = go.Layout( plot_bgcolor='rgba(0,0,0,0)',
                        paper_bgcolor='rgba(0,0,0,0)',
-                       height=8000,
-                       width=8000,
                        showlegend=False,
                        xaxis=dict(showgrid=False,visible=False)
                        ,yaxis=dict(showgrid=False,visible=False,))
