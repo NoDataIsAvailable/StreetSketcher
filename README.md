@@ -1,4 +1,4 @@
-# City-Wireframe-Generator
+# StreetSketcher
 
 This is a simple tool to create a Road only top down view of a city.
 It uses OpenStreetMap Data to generate these Images
