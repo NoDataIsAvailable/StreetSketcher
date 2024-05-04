@@ -89,8 +89,8 @@ def convert_data(street_data):
         last_node = None
         for geometry in street['geometry']:
             print (geometry)
-            x = int(geometry['lon']  * 100000)
-            y = int(geometry['lat']  * 100000)
+            x = geometry['lon']
+            y = geometry['lat']
             node_name = f"{x}-{y}"
             positions[node_name] = {'x':x,'y':y}
             if last_node:
