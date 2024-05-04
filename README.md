@@ -1,5 +1,14 @@
 # City-Wireframe-Generator
-This tool is used to create a Road only top down view of a city
+
+This is a simple tool to create a Road only top down view of a city.
+It uses OpenStreetMap Data to generate these Images
+
+
+
+### Disclaimer
+
+This is a very basic and slow prototype. Don't expect too much.
+
 
 ## Installation
 
@@ -50,7 +59,10 @@ python cli.py -p YourPostalCode -o Outputfilename.Format -r Resolution
 
 #### Example
 ```
-python cli.py -p 10 -o Berlin.png -r 4000
+python cli.py -p 50667 -o Collogne.png -r 4000
 ```
 
 
+
+
+![Collogne](Collogne.png "Title")
