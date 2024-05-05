@@ -1,4 +1,4 @@
-kaleido==0.1.0.post1
+kaleido==0.1.0
 urllib3==2.2.1
 click==8.1.7
 plotly==5.21.0
