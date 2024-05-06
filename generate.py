@@ -9,12 +9,12 @@ import urllib
 
 
 
-def generate_img(name, postal_code, path, resolution):
+def generate_img(name, postal_code, path, resolution, country):
     query = None
     if postal_code:
-       query = create_query(postal_code, postal_code = True)
+       query = create_query(postal_code, postal_code = True, country = country)
     else:
-       query = create_query(name, postal_code = False)
+       query = create_query(name, postal_code = False, country = country)
 
     if not query:
         raise ValueError("Query is None pls check your input")
@@ -37,7 +37,7 @@ def generate_img(name, postal_code, path, resolution):
     fig.write_image(path,width=resolution,height=resolution,validate=False)
     
     
-def create_query(location, postal_code = False):
+def create_query(location, postal_code = False, country = None):
     if not location:
         raise ValueError("Location can not be None")
     
@@ -51,19 +51,24 @@ def create_query(location, postal_code = False):
 
     if not area:
         raise ValueError("No area specified")
-    
-
+    country_tag = ""
+    country_area = ""
+    if country:
+        country_tag = "(area.country)"
+        country_area = f"""area[name="{country}"]->.country;"""
+        
     # create final query    
     query =f"""[out:json][timeout:25];
+        {country_area}
         {area}->.searchArea;
         (
-        way["highway"="primary"](area.searchArea);
-        way["highway"="secondary"](area.searchArea);
-        way["highway"="residential"](area.searchArea);
-        way["highway"="tertiary"](area.searchArea);
-        way["highway"="pedestrian"](area.searchArea);
-        way["highway"="path"](area.searchArea);
-        way["highway"="living_street"](area.searchArea);
+        way["highway"="primary"](area.searchArea){country_tag};
+        way["highway"="secondary"](area.searchArea){country_tag};
+        way["highway"="residential"](area.searchArea){country_tag};
+        way["highway"="tertiary"](area.searchArea){country_tag};
+        way["highway"="pedestrian"](area.searchArea){country_tag};
+        way["highway"="path"](area.searchArea){country_tag};
+        way["highway"="living_street"](area.searchArea){country_tag};
         );
         out geom;"""
         
